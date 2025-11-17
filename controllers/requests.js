@@ -12,11 +12,11 @@ exports.getRequests = async (req, res, next) => {
     if (req.user.role === "admin") {
       requests = await Request.find()
         .populate("user", "name email role")
-        .populate("product_id", "name sku category stockQuantity");
+        .populate("product_id", "name sku category stockQuantity isActive");
     } else {
       requests = await Request.find({ user: req.user.id })
         .populate("user", "name email role")
-        .populate("product_id", "name sku category stockQuantity");
+        .populate("product_id", "name sku category stockQuantity isActive");
     }
 
     res.status(200).json({
